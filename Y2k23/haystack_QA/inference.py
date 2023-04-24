@@ -11,7 +11,7 @@ import os
 
 class Event_qa():
     def __init__(self):
-        self.document_store = WeaviateDocumentStore(index="cs",
+        self.document_store = WeaviateDocumentStore(index="events_cs_ms",
                                           embedding_dim=128,
                                           return_embedding=True)
         self.retriever = DensePassageRetriever(
@@ -33,7 +33,7 @@ class Event_qa():
             print(f"Answer: {result['answers'][0]}")
         return answer
 if __name__ == "__main__":
-    context_qa = Context_qa()
+    context_qa = Event_qa()
     query = 'What is the name of the alert?'
     res = context_qa.query(s_id = "12", query=query)
     print('Results: ')
