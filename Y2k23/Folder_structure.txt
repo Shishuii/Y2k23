@@ -1,0 +1,22 @@
+1. data - This folder holds the data shared for the hackathon.
+
+
+2. data_extraction - There are two processes involved here:
+	a. Remove duplicate entries: The shared data has enormous amounts of duplicate data. The files “Remove Duplicates - cs.ipynb” and “Remove Duplicates - ms.ipynb” remove these duplicates and creates two files “cs.csv” and “ms.csv”.
+
+	b. Form Data CS.ipynb: The files “cs.csv” and “ms.csv” is read and each event is converted into a natural text. The output of this is stored in “cs_train.csv” and “ms_train.csv”. 
+
+
+3. haystack QA - There are two processes involved here:
+	a. Create_db.py : This is the process of creating embeddings of the text. Two columns, “event_id”/”AlertID” and “combined_data” are taken and embeddings are generated and stored here. Weaviate has been used as the vector database and Haystack is used for the NLP pipeline. Two models are used for generating embeddings, one for the passage text(the text generated out of the event json) and one for the query text(which is applied at runtime, when the query is passed). 
+		query_embedding_model="vblagoje/dpr-question_encoder-single-lfqa-wiki",
+		passage_embedding_model="vblagoje/dpr-ctx_encoder-single-lfqa-wiki",
+
+	b. inf.py : After the embeddings are created, the inference part involves passing a query and an event_id to get an answer. 
+
+
+Apart from this, we need to have weaviate run using this docker command:
+sudo docker run -d -p 8080:8080 --env AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED='true' --env PERSISTENCE_DATA_PATH='/var/lib/weaviate' semitechnologies/weaviate
+
+
+
