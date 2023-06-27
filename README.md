@@ -1,5 +1,5 @@
 # Y2k23
-Solution for Polyglot challenge
+Solution for Polyglot challenge hosted by Hackerearth ([link](https://polyglot.hackerearth.com/))
 
 Our approach:
 The approach here is to convert event json to natural text, get the embeddings for this text and store it in a Weaviate vector database.
